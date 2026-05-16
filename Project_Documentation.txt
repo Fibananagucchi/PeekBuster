@@ -1,0 +1,53 @@
+PEEKBUSTER: PROJECT DOCUMENTATION
+================================
+
+1. OVERVIEW
+-----------
+PeekBuster is an advanced Android security application acting as a "Cyber-Sentinel." It monitors application behavior, analyzes network traffic, and performs automated AI audits of system permissions to protect user privacy.
+
+2. CORE FEATURES
+----------------
+
+A. ADVISOR (DASHBOARD)
+- Live counters for Dangerous and Suspicious apps.
+- Dynamic System Threat Log (carousel).
+- Integrated background system scan with real-time progress.
+
+B. AUDIT (PERMISSION MONITOR)
+- Lists all apps sorted by risk level (Red > Yellow > Green > White).
+- Displays Permission Ratios (Granted/Requested, e.g., "2/5 PERMISSIONS").
+- Detailed AI Intel Reports explaining risks in plain English.
+- Whitelist management (Trust/Untrust apps).
+
+C. TRAFFIC (NETWORK SHIELD)
+- Real-time logging of app connections via local VPN.
+- Automated AI vetting of destination domains.
+- Encryption status detection (TLS/HTTPS awareness).
+
+
+3. TECHNICAL OPERATION
+----------------------
+
+STEP 1: LOCAL MONITORING
+The app uses PackageManager to find risky permissions and AppOps/UsageStats to detect if sensitive sensors (Camera/Mic) were used in the background.
+
+STEP 2: AI ANALYSIS
+Metadata is sent to the Groq API. We implement "Few-Shot Prompting" and "Logical Cross-Checks" to ensure the AI is fair, consistent, and doesn't hallucinate "Dangerous" scores without proof.
+
+STEP 3: TRAFFIC ANALYSIS
+A passive VPN service captures domain names. Each domain is analyzed by AI to check for tracking, data exfiltration, or malware associations.
+
+
+4. PRIVACY & SECURITY
+---------------------
+- No user traffic is routed to external servers (Passive VPN).
+- No personal data is stored in the cloud.
+- Whitelists and scores are stored locally on the device.
+
+
+5. DEVELOPER INFO
+-----------------
+- UI: Jetpack Compose
+- Language: Kotlin
+- AI API: Groq (llama3-70b-8192 or similar)
+- Architecture: MVVM with StateFlow
